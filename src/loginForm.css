@@ -1,0 +1,29 @@
+
+/* mes paramètres perso */
+
+input{
+    font-size : 3vh;
+    height : 3vh;
+    width: 40vh;
+    margin: 1vh;
+  }
+  
+  button{
+    height: 4vh;
+    margin: 0.5vh;
+    font-size : 3vh;
+    
+  }
+
+  td{
+
+text-align : right !important
+
+  }
+
+  #nouveauMembre{
+
+    color: red;
+
+
+  }
