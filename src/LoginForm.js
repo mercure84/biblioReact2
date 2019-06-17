@@ -4,7 +4,9 @@ import './loginForm.css'
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
+    this.handleSubmitLogIn = this.handleSubmitLogIn.bind(this);
+
     
   }
 
@@ -15,7 +17,8 @@ class LoginForm extends React.Component {
     isLoaded : true,
     reponsePost : [],
     nouveauMembreOK : false,
-    bugSignUp : false
+    bugSignUp : false,
+    bugLogIn : false,
   };
 
   resetState = () =>{
@@ -44,7 +47,9 @@ class LoginForm extends React.Component {
     this.resetState();
   };
 
-  async handleSubmit(event) {
+
+  // fonction submit du formulaire Login ---------------------------------
+  async handleSubmitLogIn(event) {
 
     this.setState({
       isLoaded:false,
@@ -53,30 +58,27 @@ class LoginForm extends React.Component {
     
     event.preventDefault();
     const data = {
-      nom : event.target.nom.value,
-      prenom : event.target.prenom.value,
-      email : event.target.email.value,
-      encryptedPassword : event.target.encryptedPassword.value
+      username : event.target.email.value,
+      password : event.target.encryptedPassword.value
     }
-
+    
+    
     try{
-    const dataJson = JSON.stringify(data);
-    console.log(dataJson);
-      const ajouterMembre = await fetch('http://localhost:8080/ajouterMembre', {
-      method: 'POST',
-      body: dataJson,
+      const seConnecter = await fetch('http://localhost:8080/', {
+      method: 'GET',
       headers:{
-        'Content-Type': 'application/json'}
+        'Content-Type': 'x-www-form-urlencoded',
+        'Authorization': `Basic ${btoa(`${data.username}:${data.password}`)}`,
+        }
     });
-    const reponsePost = ajouterMembre.json();
-    //console.log("le membre " + data.nom + " a été posté !");
+    const reponsePost = seConnecter.text();
 
     this.setState({
     isLoaded : true,
     showSignInForm: false,
     showSignUpForm: false,
-    nouveauMembreOK : true,
-    bugSignUp : false
+    bugLogIn : false
+
     });
 
   
@@ -85,11 +87,63 @@ class LoginForm extends React.Component {
     catch (error){
 this.setState({
   isLoaded:true,
-  bugSignUp : true,
+  bugLogIn : true,
   error });
 }
 
     }
+//---------------------------------------
+
+
+    // fonction submit du formulaire SIgnup
+    async handleSubmitSignUp(event) {
+
+      this.setState({
+        isLoaded:false,
+      })
+      
+      event.preventDefault();
+      const data = {
+        nom : event.target.nom.value,
+        prenom : event.target.prenom.value,
+        email : event.target.email.value,
+        encryptedPassword : event.target.encryptedPassword.value
+      }
+      try{
+      const dataJson = JSON.stringify(data);
+      console.log(dataJson);
+        const ajouterMembre = await fetch('http://localhost:8080/ajouterMembre', {
+        method: 'POST',
+        body: dataJson,
+        headers:{
+          'Content-Type': 'application/json'}
+        
+      });
+      const reponsePost = ajouterMembre.json();
+      //console.log("le membre " + data.nom + " a été posté !");
+  
+      this.setState({
+      isLoaded : true,
+      showSignInForm: false,
+      showSignUpForm: false,
+      nouveauMembreOK : true,
+      bugSignUp : false
+      });
+  
+    
+    } 
+      
+      catch (error){
+  this.setState({
+    isLoaded:true,
+    bugSignUp : true,
+    error });
+  }
+  
+      }
+
+
+
 
 
   render() {
@@ -98,7 +152,9 @@ this.setState({
 
 {!this.state.isLoaded &&<p>En chargement...</p>}
 {this.state.nouveauMembreOK &&<p id="nouveauMembre">Vous avez bien été enregistré !</p>}
-{this.state.bugSignUp &&<p id="bugSignUp">Un problème est apparu... : {this.error}</p>}
+{this.state.bugSignUp &&<p id="bugSignUp">Un problème est apparu dans l'enregistrement... : {this.error}</p>}
+{this.state.bugLogIn &&<p id="bugLogIn">Un problème est apparu dans la tentative de login... : {this.error}</p>}
+
 
 
 
@@ -111,7 +167,7 @@ this.setState({
                 <button style={{color : 'red'}}>Se déconnecter</button>
 
 
-        {this.state.showSignUpForm &&<form id="signUpForm" onSubmit={this.handleSubmit}>
+        {this.state.showSignUpForm &&<form id="signUpForm" onSubmit={this.handleSubmitSignUp}>
       <table>
         <tbody>
           <tr>
@@ -169,13 +225,13 @@ this.setState({
     </form>}
      
 
-{this.state.showSignInForm && <form id="signInForm" action="#">
-<label htmlFor="email1">Votre adresse email </label>
-<input type="text" id="email1" name="email1" required />
+{this.state.showSignInForm && <form id="signInForm" onSubmit={this.handleSubmitLogIn}>
+<label htmlFor="email">Votre adresse email </label>
+<input type="text" id="email" name="email" required />
 <br />
-<label htmlFor="password">Votre mot de passe </label>
+<label htmlFor="encryptedPassword">Votre mot de passe </label>
 
-<input type="password" id="password" name="password" required />
+<input type="password" id="encryptedPassword" name="encryptedPassword" required />
 <br />
 <button type="submit">Connexion</button>
 </form>}

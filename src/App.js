@@ -6,28 +6,49 @@ import Dashboard from './DashBoard.js';
 import RechercheLivre from './RechercheLivre.js'
 import Emprunts from './Emprunts';
 
-function App() {
-  return (
+
+
+
+class App extends React.Component{
+
+  constructor(props) {
+    super(props);
+   
+  }
+  state = {
+    showDashBoard: false,
+    showRechercheLivre: false,
+    showLoginForm : true,
+  };
+
+  resetState = () =>{
+    this.setState({
+      showDashBoard: false,
+      showRechercheLivre: false,
+    })}
+  
+  render (){
+    return(
     <div className="App">
       <header className="App-header">
         <div>
-        <LoginForm />
+
+      {this.state.showLoginForm &&<LoginForm />}
+
       <img src={logo} className="App-logo" alt="logo" /><h1>Bienvenu(e) dans votre Bibliothèque !</h1>
       </div>
       <p>Ce site web a été construit avec ReactJS</p>
 
-      
 
-      <Dashboard />
 
-      <RechercheLivre />
+      {this.state.showDashBoard &&<Dashboard />}
 
-      <Emprunts />
-      
-        
+      {this.state.showRechercheLivre&& <RechercheLivre />}
+
+       
       </header>
     </div>
-  );
-}
+  
+)}}
 
 export default App;
