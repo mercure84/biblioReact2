@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
     
     
     try{
-      const seConnecter = await fetch('http://localhost:8080/', {
+      const seConnecter = await fetch('http://localhost:8080/login', {
       method: 'GET',
       headers:{
         'Content-Type': 'x-www-form-urlencoded',
@@ -107,7 +107,8 @@ this.setState({
         nom : event.target.nom.value,
         prenom : event.target.prenom.value,
         email : event.target.email.value,
-        encryptedPassword : event.target.encryptedPassword.value
+        password : event.target.password.value,
+        repassword : event.target.repassword.value
       }
       try{
       const dataJson = JSON.stringify(data);
@@ -195,22 +196,22 @@ this.setState({
             </td>
           </tr>
 
-          {/* <tr>
+          <tr>
             <td>
               <label htmlFor="password">Mot de passe </label>
             </td>
             <td>
-              <input type="password" id="password"/>
+              <input type="password" id="password" name="password"/>
             </td>
-          </tr> */}
+          </tr> 
 
           <tr>
             <td>
-              <label htmlFor="encryptedPassword">Confirmer le mot de passe</label>
+              <label htmlFor="repassword">Confirmer le mot de passe</label>
             </td>
 
             <td>
-              <input type="password" id="encryptedPassword" name="encryptedPassword"  required />
+              <input type="password" id="repassword" name="repassword"  required />
             </td>
           </tr>
 

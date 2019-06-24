@@ -8,14 +8,11 @@ class Emprunts extends Component {
         }
 
 
+
     render(){
         return(
 
-<div><h2>Un div de test pour le moment !!!</h2>
-<h3>Testons encore une ligne</h3>
-
-</div>
-
+<h1> un div de test </h1>
         )
     }
 }

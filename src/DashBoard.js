@@ -21,15 +21,7 @@ render(){
 
         <p>Consulter les ouvrages de la bibliothèque d'Issy 1</p>
 
-
-
-
-        
 </div>
-
-
-
-
 
     );
 }

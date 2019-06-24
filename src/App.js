@@ -45,6 +45,9 @@ class App extends React.Component{
 
       {this.state.showRechercheLivre&& <RechercheLivre />}
 
+
+      <Emprunts />
+
        
       </header>
     </div>
