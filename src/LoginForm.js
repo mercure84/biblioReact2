@@ -1,11 +1,13 @@
 import React from "react";
-import './loginForm.css'
+import './LoginForm.css';
+import AuthService from './JWTAuthentication/AuthService.js'
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
     this.handleSubmitLogIn = this.handleSubmitLogIn.bind(this);
+    this.Auth = new AuthService();
 
     
   }
@@ -144,6 +146,19 @@ this.setState({
       }
 
 
+      // SOUMISSION DU FORMULAIRE LOGIN 
+
+      handleFormSubmit(e){
+             e.preventDefault();
+           
+             this.Auth.login(this.state.username,this.state.password)
+                 .then(res =>{
+                    this.props.history.replace('/');
+                 })
+                 .catch(err =>{
+                     alert(err);
+                 })
+         }
 
 
 
@@ -227,12 +242,12 @@ this.setState({
      
 
 {this.state.showSignInForm && <form id="signInForm" onSubmit={this.handleSubmitLogIn}>
-<label htmlFor="email">Votre adresse email </label>
-<input type="text" id="email" name="email" required />
+<label htmlFor="username">Votre adresse email </label>
+<input type="text" id="username" name="username" required />
 <br />
-<label htmlFor="encryptedPassword">Votre mot de passe </label>
+<label htmlFor="password">Votre mot de passe </label>
 
-<input type="password" id="encryptedPassword" name="encryptedPassword" required />
+<input type="password" id="password" name="password" required />
 <br />
 <button type="submit">Connexion</button>
 </form>}
