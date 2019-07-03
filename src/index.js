@@ -6,13 +6,12 @@ import './index.css';
 import App from './App';
 import LoginForm from './LoginForm';
 import * as serviceWorker from './serviceWorker';
-import Login from './JWTAuthentication/Login';
 
 ReactDOM.render(
     <Router>
         <div>
           <Route path='/' component={App} />
-          <Route exact path='/login' component={Login} />
+          <Route exact path='/login' component={LoginForm} />
         </div>
     </Router>,
     document.getElementById('root'));

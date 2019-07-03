@@ -5,6 +5,7 @@ import Dashboard from './DashBoard.js';
 import RechercheLivre from './RechercheLivre.js'
 import AuthService from './JWTAuthentication/AuthService';
 import withAuth from './JWTAuthentication/withAuth';
+import LoginForm from './LoginForm';
 const Auth = new AuthService();
 
 
@@ -35,8 +36,10 @@ class App extends React.Component{
   
   render (){
     return(
+
     <div className="App">
       <header className="App-header">
+      <LoginForm />
         <div>
 
       <img src={logo} className="App-logo" alt="logo" /><h1>Bienvenu(e) dans votre Bibliothèque !</h1>

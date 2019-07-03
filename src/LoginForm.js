@@ -1,16 +1,22 @@
 import React from "react";
 import './LoginForm.css';
 import AuthService from './JWTAuthentication/AuthService.js'
+import withAuth from './JWTAuthentication/withAuth';
+const Auth = new AuthService();
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
     this.handleSubmitLogIn = this.handleSubmitLogIn.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     this.Auth = new AuthService();
 
     
   }
+
+  
 
   state = {
     showSignInForm: false,
@@ -51,47 +57,21 @@ class LoginForm extends React.Component {
 
 
   // fonction submit du formulaire Login ---------------------------------
-  async handleSubmitLogIn(event) {
+  async handleSubmitLogIn(e) {
 
     this.setState({
       isLoaded:false,
       bugSignUp : false
     })
-    
-    event.preventDefault();
-    const data = {
-      email : event.target.email.value,
-      password : event.target.encryptedPassword.value
-    }
-    
-    
-    try{
-      const seConnecter = await fetch('http://localhost:8080/login', {
-      method: 'GET',
-      headers:{
-        'Content-Type': 'x-www-form-urlencoded',
-        'Authorization': `Basic ${btoa(`${data.email}:${data.password}`)}`,
-        }
-    });
-    const reponsePost = seConnecter.text();
-
-    this.setState({
-    isLoaded : true,
-    showSignInForm: false,
-    showSignUpForm: false,
-    bugLogIn : false
-
-    });
-
-  
-  } 
-    
-    catch (error){
-this.setState({
-  isLoaded:true,
-  bugLogIn : true,
-  error });
-}
+    e.preventDefault();
+      
+    this.Auth.login(this.state.email,this.state.password)
+        .then(res =>{
+           this.props.history.replace('/');
+        })
+        .catch(err =>{
+            alert(err);
+        })
 
     }
 //---------------------------------------
@@ -160,6 +140,22 @@ this.setState({
                  })
          }
 
+         handleChange(e){
+          this.setState(
+              {
+                  [e.target.name]: e.target.value
+              }
+          )
+            }
+
+
+
+            ///LOGOUT
+
+            handleLogout(){
+              this.Auth.logout()
+              // this.props.history.replace('/login');
+           }
 
 
   render() {
@@ -180,7 +176,7 @@ this.setState({
           showSignUpForm: false,
           bugSignUp : false
         })}}>🙀</span>
-                <button style={{color : 'red'}}>Se déconnecter</button>
+                <button style={{color : 'red'}} onClick={this.handleLogout.bind(this)} >Se déconnecter</button>
 
 
         {this.state.showSignUpForm &&<form id="signUpForm" onSubmit={this.handleSubmitSignUp}>
@@ -243,11 +239,11 @@ this.setState({
 
 {this.state.showSignInForm && <form id="signInForm" onSubmit={this.handleSubmitLogIn}>
 <label htmlFor="email">Votre adresse email </label>
-<input type="text" id="email" name="email" required />
+<input type="text" id="email" name="email" onChange={this.handleChange} required />
 <br />
 <label htmlFor="password">Votre mot de passe </label>
 
-<input type="password" id="password" name="password" required />
+<input type="password" id="password" name="password" onChange={this.handleChange} required />
 <br />
 <button type="submit">Connexion</button>
 </form>}
