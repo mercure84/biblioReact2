@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
     
     event.preventDefault();
     const data = {
-      username : event.target.email.value,
+      email : event.target.email.value,
       password : event.target.encryptedPassword.value
     }
     
@@ -70,7 +70,7 @@ class LoginForm extends React.Component {
       method: 'GET',
       headers:{
         'Content-Type': 'x-www-form-urlencoded',
-        'Authorization': `Basic ${btoa(`${data.username}:${data.password}`)}`,
+        'Authorization': `Basic ${btoa(`${data.email}:${data.password}`)}`,
         }
     });
     const reponsePost = seConnecter.text();
@@ -151,7 +151,7 @@ this.setState({
       handleFormSubmit(e){
              e.preventDefault();
            
-             this.Auth.login(this.state.username,this.state.password)
+             this.Auth.login(this.state.email,this.state.password)
                  .then(res =>{
                     this.props.history.replace('/');
                  })
@@ -242,8 +242,8 @@ this.setState({
      
 
 {this.state.showSignInForm && <form id="signInForm" onSubmit={this.handleSubmitLogIn}>
-<label htmlFor="username">Votre adresse email </label>
-<input type="text" id="username" name="username" required />
+<label htmlFor="email">Votre adresse email </label>
+<input type="text" id="email" name="email" required />
 <br />
 <label htmlFor="password">Votre mot de passe </label>
 

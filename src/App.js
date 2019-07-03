@@ -1,10 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginForm from './LoginForm.js';
 import Dashboard from './DashBoard.js';
 import RechercheLivre from './RechercheLivre.js'
-import Emprunts from './Emprunts';
+import AuthService from './JWTAuthentication/AuthService';
+import withAuth from './JWTAuthentication/withAuth';
+const Auth = new AuthService();
 
 
 
@@ -18,7 +19,6 @@ class App extends React.Component{
   state = {
     showDashBoard: false,
     showRechercheLivre: false,
-    showLoginForm : true,
   };
 
   resetState = () =>{
@@ -26,6 +26,12 @@ class App extends React.Component{
       showDashBoard: false,
       showRechercheLivre: false,
     })}
+
+    handleLogout(){
+      Auth.logout()
+      this.props.history.replace('/login');
+   }
+
   
   render (){
     return(
@@ -33,10 +39,9 @@ class App extends React.Component{
       <header className="App-header">
         <div>
 
-      {this.state.showLoginForm &&<LoginForm />}
-
       <img src={logo} className="App-logo" alt="logo" /><h1>Bienvenu(e) dans votre Bibliothèque !</h1>
       </div>
+      <h2>Welcome {this.props.user.username}</h2>
       <p>Ce site web a été construit avec ReactJS</p>
 
 
@@ -45,13 +50,10 @@ class App extends React.Component{
 
       {this.state.showRechercheLivre&& <RechercheLivre />}
 
-
-      <Emprunts />
-
        
       </header>
     </div>
   
 )}}
 
-export default App;
+export default withAuth(App);

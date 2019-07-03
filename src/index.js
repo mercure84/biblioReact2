@@ -4,12 +4,15 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
+import LoginForm from './LoginForm';
 import * as serviceWorker from './serviceWorker';
+import Login from './JWTAuthentication/Login';
 
 ReactDOM.render(
     <Router>
         <div>
           <Route path='/' component={App} />
+          <Route exact path='/login' component={Login} />
         </div>
     </Router>,
     document.getElementById('root'));
