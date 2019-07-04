@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import withAuth from "./JWTAuthentication/withAuth.js";
+import AuthService from "./JWTAuthentication/AuthService.js";
+const Auth = new AuthService();
 
 class AfficherLivres extends Component {
   constructor(props) {
     super(props);
+    this.Auth = new AuthService();
+
     this.state = {
       error: null,
       isLoaded: false,
@@ -60,4 +65,4 @@ class AfficherLivres extends Component {
   }
 }
 
-export default AfficherLivres;
+export default withAuth(AfficherLivres);

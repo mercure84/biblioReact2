@@ -1,7 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AfficherLivres from "./AfficherLivres";
-import Emprunts from "./Emprunts.js";
+import withAuth from "./JWTAuthentication/withAuth.js";
+import AuthService from "./JWTAuthentication/AuthService.js";
+
+const Auth = new AuthService();
+
 
 function RandomLivre({ livreRandom }) {
   return (
@@ -20,6 +24,8 @@ function RandomLivre({ livreRandom }) {
 class RechercheLivre extends React.Component {
   constructor(props) {
     super(props);
+    this.Auth = new AuthService();
+
   }
 
   state = {
@@ -141,4 +147,4 @@ class RechercheLivre extends React.Component {
   }
 }
 
-export default RechercheLivre;
+export default withAuth(RechercheLivre);
