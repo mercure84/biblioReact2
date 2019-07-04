@@ -10,6 +10,14 @@
   margin-top: 7%
 }
 
+.Searching-logo {
+  animation: App-logo-spin infinite 1s linear;
+  height: 10vmin;
+  pointer-events: none;
+  margin-top: 2%
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

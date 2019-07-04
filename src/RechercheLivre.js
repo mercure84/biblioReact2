@@ -1,9 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import searchingLogo from "./searching.svg";
 import AfficherLivres from "./AfficherLivres";
 import AuthService from "./JWTAuthentication/AuthService.js";
 
 function RandomLivre({ livreRandom }) {
+
   return (
     <div>
       <p>
@@ -30,13 +31,17 @@ class RechercheLivre extends React.Component {
     afficherRandom: false,
     livresFiltres: [],
     afficherFiltrage: false,
-    isLoaded: false
+    isLoaded: true
   };
 
   filtrerLivres = async event => {
     event.preventDefault();
     const typeRecherche = event.target.typeRecherche.value;
     const champRecherche = event.target.champRecherche.value;
+
+    this.setState({
+      isLoaded : false,
+    });
 
     const reponse = await fetch(
       "http://localhost:8080/filtrerLivres?" +
@@ -72,7 +77,10 @@ class RechercheLivre extends React.Component {
   };
 
   randomLivreDisponible = async () => {
-    console.log("le clic est validé sur le bouton randomLivredispo");
+
+    this.setState({
+      isLoaded : false,
+    });
 
     const response = await fetch("http://localhost:8080/randomLivre", {
       method: "GET",
@@ -88,22 +96,29 @@ class RechercheLivre extends React.Component {
     const result = await response.json();
     this.setState({
       livreRandom: result,
-      afficherRandom: true
+      afficherRandom: true,
+      isLoaded : true
     });
   };
 
   render() {
     return (
       <div className="vue">
-        <h2>Rechercher un ouvrage dans la bibliothèque</h2>
+        <table><tr><td>
+          
+        {!this.state.isLoaded && <img src={searchingLogo} className="Searching-logo" alt="searching-Logo" />}
 
+          </td><td><h2>Rechercher un ouvrage dans la bibliothèque</h2></td></tr></table>
+
+
+<div>
         <button onClick={this.randomLivreDisponible}>
           Un Livre disponible au hasard SVP ! 🎲
         </button>
         {this.state.afficherRandom && (
           <RandomLivre livreRandom={this.state.livreRandom} />
         )}
-
+</div>
         <form name="rechercheLivre" onSubmit={this.filtrerLivres}>
           <div>
             <label>
