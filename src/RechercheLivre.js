@@ -69,7 +69,17 @@ class RechercheLivre extends React.Component {
 
   randomLivreDisponible = async () => {
     console.log("le clic est validé sur le bouton randomLivredispo");
-    const response = await fetch("http://localhost:8080/randomLivre");
+  
+    const response = await fetch("http://localhost:8080/randomLivre", {
+       method: 'GET',
+       headers:{
+         Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': "Bearer " + this.Auth.getToken()
+          }});
+
+    // const response = await fetch("http://localhost:8080/randomLivre");
+
     const result = await response.json();
     this.setState({
       livreRandom: result,
