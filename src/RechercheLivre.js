@@ -91,8 +91,6 @@ class RechercheLivre extends React.Component {
       }
     });
 
-    // const response = await fetch("http://localhost:8080/randomLivre");
-
     const result = await response.json();
     this.setState({
       livreRandom: result,
@@ -104,11 +102,11 @@ class RechercheLivre extends React.Component {
   render() {
     return (
       <div className="vue">
-        <table><tr><td>
+        <table><tbody><tr><td>
           
         {!this.state.isLoaded && <img src={searchingLogo} className="Searching-logo" alt="searching-Logo" />}
 
-          </td><td><h2>Rechercher un ouvrage dans la bibliothèque</h2></td></tr></table>
+          </td><td><h2>Rechercher un ouvrage dans la bibliothèque</h2></td></tr></tbody></table>
 
 
 <div>
