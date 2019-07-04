@@ -64,6 +64,7 @@ this.resetState();
           loginOK: true,
           isLoaded: true
         });
+        localStorage.setItem("email", this.state.email);
         this.props.history.replace("/home");
       })
       .catch(err => {

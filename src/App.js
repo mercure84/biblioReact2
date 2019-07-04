@@ -15,10 +15,13 @@ class App extends React.Component {
     this.Auth = new AuthService();
     this.afficherFiltre = this.afficherFiltre.bind(this);
     this.afficherEmprunts = this.afficherEmprunts.bind(this);
+    this.getInfosUser();
   }
   state = {
     showDashBoard: false,
-    showRechercheLivre: false
+    showRechercheLivre: false,
+    dataUser : []
+  
   };
 
   resetState = () => {
@@ -32,6 +35,7 @@ class App extends React.Component {
 
   handleLogout() {
     this.Auth.logout();
+    localStorage.clear();
     this.props.history.replace("/login");
   }
 
@@ -43,12 +47,36 @@ class App extends React.Component {
   }
 
   afficherFiltre =() => {
-
     this.resetState();
     this.setState({
       showRechercheLivre : true
     })
   }
+
+
+// récupération des infos de l'utilisateur (nom, prébnom, id)
+getInfosUser = async () =>{
+  const reponse = await fetch(
+    "http://localhost:8080/Membre/data/" +
+            localStorage.getItem("email"),
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.Auth.getToken()
+      }
+    }
+  );
+
+  const resultat = await reponse.json()
+  this.setState({
+    dataUser : resultat
+  })
+
+  localStorage.setItem("nom", this.state.dataUser.nom);
+  localStorage.setItem("prenom", this.state.dataUser.prenom);
+}
 
 
 
@@ -64,9 +92,8 @@ class App extends React.Component {
 
           <div>
             <img src={logo} className="App-logo" alt="logo" />
-            <h1>Bienvenu(e) dans votre Bibliothèque !</h1>
+            <h1>Bienvenu(e) {this.state.dataUser.prenom} {this.state.dataUser.nom} dans votre Bibliothèque !</h1>
           </div>
-          <h2>Welcome {this.props.user.email}</h2>
           <p>Ce site web a été construit avec ReactJS</p>
 
           {this.state.showDashBoard && <Dashboard />}
