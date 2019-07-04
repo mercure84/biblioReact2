@@ -30,7 +30,9 @@ class LoginForm extends React.Component {
       error: null,
       isLoaded: true,
       reponsePost: [],
-      nouveauMembreOK: false
+      nouveauMembreOK: false,
+      bugSignUp: false,
+      loginKO: false
     });
   };
 
@@ -48,6 +50,8 @@ class LoginForm extends React.Component {
 
   // fonction submit du formulaire Login ---------------------------------
   async handleSubmitLogIn(e) {
+this.resetState();
+
     this.setState({
       isLoaded: false,
       bugSignUp: false
@@ -73,6 +77,8 @@ class LoginForm extends React.Component {
 
   // fonction submit du formulaire SIgnup
   async handleSubmitSignUp(event) {
+    this.resetState();
+
     this.setState({
       isLoaded: false
     });
