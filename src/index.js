@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import './index.css';
 import App from './App';
-import LoginForm from './LoginForm';
 import * as serviceWorker from './serviceWorker';
+import LoginForm from './LoginForm';
 
 ReactDOM.render(
     <Router>
         <div>
-          <Route path='/' component={App} />
+          <Route path='/home' component={App} />
           <Route exact path='/login' component={LoginForm} />
         </div>
     </Router>,

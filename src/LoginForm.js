@@ -1,10 +1,11 @@
 import React from "react";
 import './LoginForm.css';
 import AuthService from './JWTAuthentication/AuthService.js'
-import withAuth from './JWTAuthentication/withAuth';
+
 const Auth = new AuthService();
 
 class LoginForm extends React.Component {
+  
   constructor(props) {
     super(props);
     this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
@@ -12,11 +13,7 @@ class LoginForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.Auth = new AuthService();
-
-    
   }
-
-  
 
   state = {
     showSignInForm: false,
@@ -25,8 +22,9 @@ class LoginForm extends React.Component {
     isLoaded : true,
     reponsePost : [],
     nouveauMembreOK : false,
+    loginOK : false,
     bugSignUp : false,
-    bugLogIn : false,
+    loginKO : false,
   };
 
   resetState = () =>{
@@ -67,14 +65,23 @@ class LoginForm extends React.Component {
       
     this.Auth.login(this.state.email,this.state.password)
         .then(res =>{
-           this.props.history.replace('/');
+        this.setState({
+          loginOK : true,
+          isLoaded:true
+
         })
+        this.props.history.replace('/home');
+
+              })
         .catch(err =>{
-            alert(err);
+          this.setState({
+            loginKO : true,
+            isLoaded:true
+          }) 
         })
 
     }
-//---------------------------------------
+//--------------------------------------- fin submit login
 
 
     // fonction submit du formulaire SIgnup
@@ -118,27 +125,13 @@ class LoginForm extends React.Component {
       
       catch (error){
   this.setState({
-    isLoaded:true,
+    isLoaded:false,
     bugSignUp : true,
     error });
+
   }
   
       }
-
-
-      // SOUMISSION DU FORMULAIRE LOGIN 
-
-      handleFormSubmit(e){
-             e.preventDefault();
-           
-             this.Auth.login(this.state.email,this.state.password)
-                 .then(res =>{
-                    this.props.history.replace('/');
-                 })
-                 .catch(err =>{
-                     alert(err);
-                 })
-         }
 
          handleChange(e){
           this.setState(
@@ -164,8 +157,10 @@ class LoginForm extends React.Component {
 
 {!this.state.isLoaded &&<p>En chargement...</p>}
 {this.state.nouveauMembreOK &&<p id="nouveauMembre">Vous avez bien été enregistré !</p>}
-{this.state.bugSignUp &&<p id="bugSignUp">Un problème est apparu dans l'enregistrement... : {this.error}</p>}
-{this.state.bugLogIn &&<p id="bugLogIn">Un problème est apparu dans la tentative de login... : {this.error}</p>}
+{this.state.loginOK &&<p id="loginOK">Vous êtes connecté !</p>}
+{this.state.loginKO &&<p id="loginKO">Un problème est apparu dans la tentative de login, veuillez recommencer! </p>}
+
+{this.state.bugSignUp &&<p id="bugSignUp">Un problème est apparu dans l'enregistrement, veuillez recommencer!</p>}
 
 
 
