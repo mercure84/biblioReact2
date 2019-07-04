@@ -11,7 +11,6 @@ class LoginForm extends React.Component {
     this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this);
     this.handleSubmitLogIn = this.handleSubmitLogIn.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
     this.Auth = new AuthService();
   }
 
@@ -143,12 +142,7 @@ class LoginForm extends React.Component {
 
 
 
-            ///LOGOUT
 
-            handleLogout(){
-              this.Auth.logout()
-              // this.props.history.replace('/login');
-           }
 
 
   render() {
@@ -171,7 +165,6 @@ class LoginForm extends React.Component {
           showSignUpForm: false,
           bugSignUp : false
         })}}>🙀</span>
-                <button style={{color : 'red'}} onClick={this.handleLogout.bind(this)} >Se déconnecter</button>
 
 
         {this.state.showSignUpForm &&<form id="signUpForm" onSubmit={this.handleSubmitSignUp}>

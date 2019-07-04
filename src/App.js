@@ -3,18 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import Dashboard from './DashBoard.js';
 import RechercheLivre from './RechercheLivre.js'
-import AuthService from './JWTAuthentication/AuthService';
-import withAuth from './JWTAuthentication/withAuth';
-import LoginForm from './LoginForm';
+import withAuth from './JWTAuthentication/withAuth.js';
+import AuthService from './JWTAuthentication/AuthService.js'
 
 
+
+const Auth = new AuthService();
 
 class App extends React.Component{
 
   constructor(props) {
     super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.Auth = new AuthService();
 
-   
+  
   }
   state = {
     showDashBoard: false,
@@ -26,13 +29,22 @@ class App extends React.Component{
       showDashBoard: false,
       showRechercheLivre: false,
     })}
+
+
+               ///LOGOUT
+
+               handleLogout(){
+                this.Auth.logout()
+                this.props.history.replace('/login');
+             } 
   
   render (){
     return(
 
     <div className="App">
       <header className="App-header">
-      <LoginForm />
+
+      <button style={{color : 'red'}} onClick={this.handleLogout.bind(this)} >Se déconnecter</button>
         
       <div>
       <img src={logo} className="App-logo" alt="logo" /><h1>Bienvenu(e) dans votre Bibliothèque !</h1>
