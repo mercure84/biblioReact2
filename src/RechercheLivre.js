@@ -1,17 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AfficherLivres from "./AfficherLivres";
-import withAuth from "./JWTAuthentication/withAuth.js";
 import AuthService from "./JWTAuthentication/AuthService.js";
-
-const Auth = new AuthService();
-
 
 function RandomLivre({ livreRandom }) {
   return (
     <div>
       <p>
-        {`${livreRandom.titre} 👨‍🚀 ${livreRandom.auteurPrenom} ${livreRandom.auteurNom}`}
+        {`${livreRandom.titre} 👨‍🚀 ${livreRandom.auteurPrenom} ${
+          livreRandom.auteurNom
+        }`}
       </p>
       <p>
         {livreRandom.editeur + " " + livreRandom.isbn + " "}
@@ -25,7 +23,6 @@ class RechercheLivre extends React.Component {
   constructor(props) {
     super(props);
     this.Auth = new AuthService();
-
   }
 
   state = {
@@ -33,11 +30,10 @@ class RechercheLivre extends React.Component {
     afficherRandom: false,
     livresFiltres: [],
     afficherFiltrage: false,
-    isLoaded : false
+    isLoaded: false
   };
 
-  filtrerLivres = async (event) => {
-
+  filtrerLivres = async event => {
     event.preventDefault();
     const typeRecherche = event.target.typeRecherche.value;
     const champRecherche = event.target.champRecherche.value;
@@ -47,15 +43,23 @@ class RechercheLivre extends React.Component {
         "typeRecherche=" +
         typeRecherche +
         "&champRecherche=" +
-        champRecherche
+        champRecherche,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.Auth.getToken()
+        }
+      }
     );
     const result = await reponse.json();
     this.setState({
       livresFiltres: result,
       afficherFiltrage: true,
-      isLoaded : true,
+      isLoaded: true
     });
-  }
+  };
 
   supprimerListeLivres = () => {
     console.log("le bouton supprimer liste livre a été clické");
@@ -69,14 +73,15 @@ class RechercheLivre extends React.Component {
 
   randomLivreDisponible = async () => {
     console.log("le clic est validé sur le bouton randomLivredispo");
-  
+
     const response = await fetch("http://localhost:8080/randomLivre", {
-       method: 'GET',
-       headers:{
-         Accept: 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': "Bearer " + this.Auth.getToken()
-          }});
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.Auth.getToken()
+      }
+    });
 
     // const response = await fetch("http://localhost:8080/randomLivre");
 
@@ -140,21 +145,32 @@ class RechercheLivre extends React.Component {
 
         {this.state.afficherLivres && <AfficherLivres />}
 
-        {this.state.afficherFiltrage &&<div>
-          <p>Il y a {this.state.livresFiltres.length} livres correspondant à votre recherche</p>
-          <ol>
-            {this.state.livresFiltres.map(livre => (
-              <li key={livre.id} align="start">
-                <div>
-                  <p>{livre.titre + " / " + livre.auteurPrenom + " " + livre.auteurNom}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>}
+        {this.state.afficherFiltrage && (
+          <div>
+            <p>
+              Il y a {this.state.livresFiltres.length} livres correspondant à
+              votre recherche
+            </p>
+            <ol>
+              {this.state.livresFiltres.map(livre => (
+                <li key={livre.id} align="start">
+                  <div>
+                    <p>
+                      {livre.titre +
+                        " / " +
+                        livre.auteurPrenom +
+                        " " +
+                        livre.auteurNom}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-export default withAuth(RechercheLivre);
+export default RechercheLivre;
