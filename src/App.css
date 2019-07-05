@@ -14,7 +14,8 @@
   animation: App-logo-spin infinite 1s linear;
   height: 10vmin;
   pointer-events: none;
-  margin-top: 2%
+  margin-top: 2%;
+  color: orange;
 }
 
 

@@ -9,9 +9,9 @@ import LoginForm from './LoginForm';
 ReactDOM.render(
     <Router>
         <div>
-          <Route path='/home' component={App} />
+          <Route path="/(home|/|)/" component={App} />
           <Route path='/login' component={LoginForm} />
-          <Route path='/' component={App} />
+          
         </div>
     </Router>,
     document.getElementById('root'));
