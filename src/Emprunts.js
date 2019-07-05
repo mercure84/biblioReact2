@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import withAuth from "./JWTAuthentication/withAuth.js";
 import AuthService from "./JWTAuthentication/AuthService.js";
 
 const Auth = new AuthService();
@@ -15,7 +14,7 @@ class Emprunts extends Component {
 
 state = {
 isLoaded : true,
-listeEmprunt : []
+listeEmprunts : []
 
 };
 
@@ -37,20 +36,31 @@ headers :{
 
 const resultat = await reponse.json();
 this.setState({
-    listeEmprunt : resultat
+    listeEmprunts : resultat
 })
 
 }
 
 
-
-
     render(){
         return(
 
+<div className="vue">
+
+{(this.state.listeEmprunts.length!=0) && <div id="listeEmprunts">
 <h2> Vos emprunts en cours : </h2>
+<table>
+<thead><tr><th>Livre</th><th>Date d'emprunt</th><th>Date limite de restitution</th><th>Prolonger</th></tr></thead>
+<tbody>
+{this.state.listeEmprunts.map(emprunt => (
+<tr key={emprunt.id}><td>{emprunt.livre.titre}</td><td>{emprunt.debutDate}</td><td>{emprunt.finDate}</td><td>X</td></tr>))}
+
+</tbody></table>
 
 
+
+</div>}
+</div>
 
 
         )

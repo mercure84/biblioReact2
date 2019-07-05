@@ -1,6 +1,5 @@
 import React from "react";
 import searchingLogo from "./searching.svg";
-import AfficherLivres from "./AfficherLivres";
 import AuthService from "./JWTAuthentication/AuthService.js";
 
 function RandomLivre({ livreRandom }) {
@@ -71,10 +70,6 @@ class RechercheLivre extends React.Component {
     this.setState({ afficherLivres: false, afficherFiltrage: false });
   };
 
-  afficherListeLivres = async () => {
-    console.log("le clic est validé sur le bouton afficher la liste");
-    this.setState({ afficherLivres: true });
-  };
 
   randomLivreDisponible = async () => {
 
@@ -149,14 +144,9 @@ class RechercheLivre extends React.Component {
           <button>Rechercher</button>
         </form>
 
-        <br />
-        <button onClick={this.afficherListeLivres}>
-          Montrer tous les livres (test API)
-        </button>
-        <br />
+ 
         <button onClick={this.supprimerListeLivres}>Purger</button>
 
-        {this.state.afficherLivres && <AfficherLivres />}
 
         {this.state.afficherFiltrage && (
           <div>

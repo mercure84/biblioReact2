@@ -48,3 +48,9 @@ border-style : groove;
 border: #61dafb,
 }
 
+table, td {
+  border-collapse: collapse;
+  text-align: left;
+
+}
+
