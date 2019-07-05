@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./JWTAuthentication/AuthService.js";
 import searchingLogo from "./searching.svg";
+import "./Emprunts.css";
 
 
 const Auth = new AuthService();
