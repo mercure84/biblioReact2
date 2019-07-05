@@ -10,7 +10,8 @@ ReactDOM.render(
     <Router>
         <div>
           <Route path='/home' component={App} />
-          <Route exact path='/login' component={LoginForm} />
+          <Route path='/login' component={LoginForm} />
+          <Route path='/' component={App} />
         </div>
     </Router>,
     document.getElementById('root'));
