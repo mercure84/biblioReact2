@@ -1,10 +1,10 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Dashboard from "./DashBoard.js";
 import RechercheLivre from "./RechercheLivre.js";
 import withAuth from "./JWTAuthentication/withAuth.js";
 import AuthService from "./JWTAuthentication/AuthService.js";
+import Emprunts from "./Emprunts";
 
 const Auth = new AuthService();
 
@@ -18,7 +18,7 @@ class App extends React.Component {
     this.getInfosUser();
   }
   state = {
-    showDashBoard: false,
+    showEmprunts: false,
     showRechercheLivre: false,
     dataUser : []
   
@@ -26,7 +26,7 @@ class App extends React.Component {
 
   resetState = () => {
     this.setState({
-      showDashBoard: false,
+      showEmprunts: false,
       showRechercheLivre: false
     });
   };
@@ -42,7 +42,7 @@ class App extends React.Component {
   afficherEmprunts = () => {
     this.resetState();
     this.setState({
-      showDashBoard : true
+      showEmprunts : true
     })
   }
 
@@ -76,6 +76,7 @@ getInfosUser = async () =>{
 
   localStorage.setItem("nom", this.state.dataUser.nom);
   localStorage.setItem("prenom", this.state.dataUser.prenom);
+  localStorage.setItem("userId", this.state.dataUser.id);
 }
 
 
@@ -96,7 +97,7 @@ getInfosUser = async () =>{
           </div>
           <p>Ce site web a été construit avec ReactJS</p>
 
-          {this.state.showDashBoard && <Dashboard />}
+          {this.state.showEmprunts && <Emprunts />}
 
           {this.state.showRechercheLivre && <RechercheLivre />}
         </header>
