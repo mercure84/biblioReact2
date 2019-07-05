@@ -75,6 +75,7 @@ class Emprunts extends Component {
       <div className="vue">
 {!this.state.isLoaded && <img src={searchingLogo} className="Searching-logo" alt="searching-Logo" />}
 
+{((this.state.listeEmprunts.length == 0) && (this.state.isLoaded)) && <span>"Vous n'avez aucun emprunt de livre en cours :(</span> }
         {this.state.listeEmprunts.length != 0 && (
           <div id="listeEmprunts">
             <h2> Vos emprunts en cours : </h2>

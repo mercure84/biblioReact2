@@ -85,11 +85,11 @@ getInfosUser = async () =>{
     return (
       <div className="App">
         <header className="App-header">
-          <button style={{ color: "red" }} onClick={this.handleLogout}>
+          <div><button style={{ color: "red" }} onClick={this.handleLogout}>
             Se déconnecter
           </button>
           <button onClick={this.afficherFiltre}>Rechercher un ouvrage</button>
-          <button onClick={this.afficherEmprunts}>Mes emprunts</button>
+          <button onClick={this.afficherEmprunts}>Mes emprunts</button></div>
 
           <div>
             <img src={logo} className="App-logo" alt="logo" />
