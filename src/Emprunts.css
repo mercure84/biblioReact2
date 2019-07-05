@@ -3,3 +3,9 @@ table, tbody, td {
     text-align:left !important;
   
   }
+
+  td{
+    padding: 10px;
+  }
+
+ 

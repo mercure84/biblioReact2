@@ -97,11 +97,9 @@ class RechercheLivre extends React.Component {
   render() {
     return (
       <div className="vue">
-        <table><tbody><tr><td>
-          
-        {!this.state.isLoaded && <img src={searchingLogo} className="Searching-logo" alt="searching-Logo" />}
+        <h2>Rechercher un ouvrage dans la bibliothèque</h2>
+         {!this.state.isLoaded && <div> <img src={searchingLogo} className="Searching-logo" alt="searching-Logo" /></div>}
 
-          </td><td><h2>Rechercher un ouvrage dans la bibliothèque</h2></td></tr></tbody></table>
 
 
 <div>

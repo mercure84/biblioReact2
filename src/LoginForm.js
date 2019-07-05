@@ -104,7 +104,6 @@ this.resetState();
       });
       const reponsePost = ajouterMembre.json();
       //console.log("le membre " + data.nom + " a été posté !");
-
       this.setState({
         isLoaded: true,
         showSignInForm: false,
@@ -112,10 +111,12 @@ this.resetState();
         nouveauMembreOK: true,
         bugSignUp: false
       });
+
     } catch (error) {
       this.setState({
         isLoaded: false,
         bugSignUp: true,
+        nouveauMembreOK: false,
         error
       });
     }

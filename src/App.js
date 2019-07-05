@@ -92,14 +92,15 @@ getInfosUser = async () =>{
           <button onClick={this.afficherEmprunts}>Mes emprunts</button></div>
 
           <div>
-            <img src={logo} className="App-logo" alt="logo" />
             <h1>Bienvenu(e) {this.state.dataUser.prenom} {this.state.dataUser.nom} dans votre Bibliothèque !</h1>
           </div>
-          <p>Ce site web a été construit avec ReactJS</p>
 
           {this.state.showEmprunts && <Emprunts />}
 
           {this.state.showRechercheLivre && <RechercheLivre />}
+
+          <div>Ce site web a été construit avec ReactJS <span><img src={logo} className="App-logo" alt="logo" /></span></div>
+
         </header>
       </div>
     );

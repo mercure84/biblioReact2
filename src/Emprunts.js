@@ -96,7 +96,7 @@ class Emprunts extends Component {
                     <td>{new Date(emprunt.debutDate).toLocaleString('fr-FR', Emprunts.dateOptions)}</td>
                     <td>{new Date(emprunt.finDate).toLocaleString('fr-FR', Emprunts.dateOptions)}</td>
                     <td>{emprunt.rendu ? <span>Oui</span> : <span>Non</span>}</td>
-                    <td><span>{emprunt.prolonge ? <span>Oui</span> : <span>Non</span>}</span><span> {!(emprunt.prolonge || emprunt.rendu) && <button onClick={()=>this.prolonger(emprunt)}>+4 sem.</button>}</span></td>
+                    <td><span>{emprunt.prolonge ? <span>Oui</span> : <span>Non</span>}</span><span> {!(emprunt.prolonge || emprunt.rendu) && <button onClick={()=>this.prolonger(emprunt)}>+4sem.</button>}</span></td>
 
 
                   </tr>
