@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./JWTAuthentication/AuthService.js";
+import searchingLogo from "./searching.svg";
+
 
 const Auth = new AuthService();
 
@@ -40,6 +42,8 @@ class Emprunts extends Component {
   render() {
     return (
       <div className="vue">
+{!this.state.isLoaded && <img src={searchingLogo} className="Searching-logo" alt="searching-Logo" />}
+
         {this.state.listeEmprunts.length != 0 && (
           <div id="listeEmprunts">
             <h2> Vos emprunts en cours : </h2>
@@ -50,6 +54,7 @@ class Emprunts extends Component {
                   <th>Date d'emprunt</th>
                   <th>Date limite de restitution</th>
                   <th>Prolonger</th>
+                  <th>Restitué ?</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,7 +63,9 @@ class Emprunts extends Component {
                     <td>{emprunt.livre.titre}</td>
                     <td>{new Date(emprunt.debutDate).toLocaleString('fr-FR', Emprunts.dateOptions)}</td>
                     <td>{new Date(emprunt.finDate).toLocaleString('fr-FR', Emprunts.dateOptions)}</td>
-                    <td>X</td>
+                    <td>{emprunt.prolonge ? <span>Oui</span> : <span>Non</span>}</td>
+                    <td>{emprunt.rendu ? <span>Oui</span> : <span>Non</span>}</td>
+
                   </tr>
                 ))}
               </tbody>
