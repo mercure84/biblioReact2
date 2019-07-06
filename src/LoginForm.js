@@ -1,5 +1,6 @@
 import React from "react";
 import "./LoginForm.css";
+import "./index.css";
 import AuthService from "./JWTAuthentication/AuthService.js";
 
 const Auth = new AuthService();
@@ -131,7 +132,9 @@ this.resetState();
   render() {
     return (
       <div id="connexion" className="vue">
-        {!this.state.isLoaded && <p>En chargement...</p>}
+<h2>Connectez vous pour accéder à votre compte Bibliothèque ! 📚</h2>
+
+        {!this.state.isLoaded && <p>Communication avec le serveur...</p>}
         {this.state.nouveauMembreOK && (
           <p id="nouveauMembre">Vous avez bien été enregistré !</p>
         )}
@@ -139,7 +142,7 @@ this.resetState();
         {this.state.loginKO && (
           <p id="loginKO">
             Un problème est apparu dans la tentative de login, veuillez
-            recommencer!{" "}
+            recommencer!
           </p>
         )}
 
