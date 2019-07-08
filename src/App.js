@@ -5,6 +5,8 @@ import RechercheLivre from "./RechercheLivre.js";
 import withAuth from "./JWTAuthentication/withAuth.js";
 import AuthService from "./JWTAuthentication/AuthService.js";
 import Emprunts from "./Emprunts";
+import {urlServiceApi} from './configJM';
+
 
 const Auth = new AuthService();
 
@@ -57,7 +59,7 @@ class App extends React.Component {
 // récupération des infos de l'utilisateur (nom, prébnom, id)
 getInfosUser = async () =>{
   const reponse = await fetch(
-    "http://localhost:8080/api/Membre/data/" +
+    urlServiceApi + "Membre/data/" +
             localStorage.getItem("email"),
     {
       method: "GET",

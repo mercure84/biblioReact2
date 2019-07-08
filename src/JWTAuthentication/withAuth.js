@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService';
+import {urlServiceApi} from '../configJM'
 
 export default function withAuth(AuthComponent) {
-    const Auth = new AuthService('http://localhost:8080/api');
+    const Auth = new AuthService({urlServiceApi});
     return class AuthWrapped extends Component {
         constructor() {
             super();

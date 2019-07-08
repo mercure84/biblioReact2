@@ -1,6 +1,8 @@
 import React from "react";
 import searchingLogo from "./searching.svg";
 import AuthService from "./JWTAuthentication/AuthService.js";
+import {urlServiceApi} from './configJM';
+
 
 function RandomLivre({ livreRandom }) {
 
@@ -43,8 +45,7 @@ class RechercheLivre extends React.Component {
     });
 
     const reponse = await fetch(
-      "http://localhost:8080/api/filtrerLivres?" +
-        "typeRecherche=" +
+      urlServiceApi + "filtrerLivres?" + "typeRecherche=" +
         typeRecherche +
         "&champRecherche=" +
         champRecherche,
@@ -77,7 +78,7 @@ class RechercheLivre extends React.Component {
       isLoaded : false,
     });
 
-    const response = await fetch("http://localhost:8080/api/randomLivre", {
+    const response = await fetch(urlServiceApi + "randomLivre", {
       method: "GET",
       headers: {
         Accept: "application/json",

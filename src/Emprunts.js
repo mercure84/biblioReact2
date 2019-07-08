@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AuthService from "./JWTAuthentication/AuthService.js";
 import searchingLogo from "./searching.svg";
 import "./Emprunts.css";
+import {urlServiceApi} from './configJM';
+
 
 
 const Auth = new AuthService();
@@ -49,7 +51,7 @@ class Emprunts extends Component {
 
   afficherEmprunts = async () => {
     const reponse = await fetch(
-      "http://localhost:8080/api/EmpruntsMembre/" + localStorage.getItem("userId"),
+      urlServiceApi + "EmpruntsMembre/" + localStorage.getItem("userId"),
       {
         method: "GET",
         headers: {

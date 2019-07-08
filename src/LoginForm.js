@@ -2,6 +2,8 @@ import React from "react";
 import "./LoginForm.css";
 import "./index.css";
 import AuthService from "./JWTAuthentication/AuthService.js";
+import {urlServiceApi} from './configJM';
+
 
 const Auth = new AuthService();
 
@@ -96,7 +98,7 @@ this.resetState();
     try {
       const dataJson = JSON.stringify(data);
       console.log(dataJson);
-      const ajouterMembre = await fetch("http://localhost:8080/api/ajouterMembre", {
+      const ajouterMembre = await fetch(urlServiceApi + "ajouterMembre", {
         method: "POST",
         body: dataJson,
         headers: {
