@@ -43,7 +43,7 @@ class RechercheLivre extends React.Component {
     });
 
     const reponse = await fetch(
-      "http://localhost:8080/filtrerLivres?" +
+      "http://localhost:8080/api/filtrerLivres?" +
         "typeRecherche=" +
         typeRecherche +
         "&champRecherche=" +
@@ -77,7 +77,7 @@ class RechercheLivre extends React.Component {
       isLoaded : false,
     });
 
-    const response = await fetch("http://localhost:8080/randomLivre", {
+    const response = await fetch("http://localhost:8080/api/randomLivre", {
       method: "GET",
       headers: {
         Accept: "application/json",

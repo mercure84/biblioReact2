@@ -27,7 +27,7 @@ class Emprunts extends Component {
       isLoaded : false
     })
     const reponse = await fetch(
-      "http://localhost:8080/prolongerEmprunt/"+emprunt.id,{
+      "http://localhost:8080/api/prolongerEmprunt/"+emprunt.id,{
         method: "GET",
         headers:{
           Accept: "application/json",
@@ -49,7 +49,7 @@ class Emprunts extends Component {
 
   afficherEmprunts = async () => {
     const reponse = await fetch(
-      "http://localhost:8080/EmpruntsMembre/" + localStorage.getItem("userId"),
+      "http://localhost:8080/api/EmpruntsMembre/" + localStorage.getItem("userId"),
       {
         method: "GET",
         headers: {

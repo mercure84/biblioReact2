@@ -96,7 +96,7 @@ this.resetState();
     try {
       const dataJson = JSON.stringify(data);
       console.log(dataJson);
-      const ajouterMembre = await fetch("http://localhost:8080/ajouterMembre", {
+      const ajouterMembre = await fetch("http://localhost:8080/api/ajouterMembre", {
         method: "POST",
         body: dataJson,
         headers: {

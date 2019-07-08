@@ -57,7 +57,7 @@ class App extends React.Component {
 // récupération des infos de l'utilisateur (nom, prébnom, id)
 getInfosUser = async () =>{
   const reponse = await fetch(
-    "http://localhost:8080/Membre/data/" +
+    "http://localhost:8080/api/Membre/data/" +
             localStorage.getItem("email"),
     {
       method: "GET",
