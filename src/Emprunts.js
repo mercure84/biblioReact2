@@ -29,7 +29,7 @@ class Emprunts extends Component {
       isLoaded : false
     })
     const reponse = await fetch(
-      "http://localhost:8080/api/prolongerEmprunt/"+emprunt.id,{
+      urlServiceApi+"prolongerEmprunt/"+emprunt.id,{
         method: "GET",
         headers:{
           Accept: "application/json",
