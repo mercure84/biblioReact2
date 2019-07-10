@@ -1,9 +1,8 @@
 import React from "react";
 import "./LoginForm.css";
-import "./index.css";
 import AuthService from "./JWTAuthentication/AuthService.js";
-import {urlServiceApi} from './configJM';
-
+import { urlServiceApi } from "./configJM";
+import searchingLogo from "./searching.svg";
 
 const Auth = new AuthService();
 
@@ -53,7 +52,7 @@ class LoginForm extends React.Component {
 
   // fonction submit du formulaire Login ---------------------------------
   async handleSubmitLogIn(e) {
-this.resetState();
+    this.resetState();
 
     this.setState({
       isLoaded: false,
@@ -114,7 +113,6 @@ this.resetState();
         nouveauMembreOK: true,
         bugSignUp: false
       });
-
     } catch (error) {
       this.setState({
         isLoaded: false,
@@ -134,103 +132,78 @@ this.resetState();
   render() {
     return (
       <div id="connexion" className="vue">
-<h2>Connectez vous pour accéder à votre compte Bibliothèque ! 📚</h2>
+        <div className="loginChoice">
+          <h2>Connectez vous pour accéder à votre compte Bibliothèque ! 📚</h2>
+          {!this.state.isLoaded && (
+            <div>
+              {" "}
+              <img
+                src={searchingLogo}
+                className="Searching-logo"
+                alt="searching-Logo"
+              />
+            </div>
+          )}
+          {this.state.nouveauMembreOK && (
+            <p id="nouveauMembre">Vous avez bien été enregistré !</p>
+          )}
+          {this.state.loginOK && <p id="loginOK">Vous êtes connecté !</p>}
+          {this.state.loginKO && (
+            <p id="loginKO">
+              Un problème est apparu dans la tentative de login, veuillez
+              recommencer!
+            </p>
+          )}
 
-        {!this.state.isLoaded && <p>Communication avec le serveur...</p>}
-        {this.state.nouveauMembreOK && (
-          <p id="nouveauMembre">Vous avez bien été enregistré !</p>
-        )}
-        {this.state.loginOK && <p id="loginOK">Vous êtes connecté !</p>}
-        {this.state.loginKO && (
-          <p id="loginKO">
-            Un problème est apparu dans la tentative de login, veuillez
-            recommencer!
-          </p>
-        )}
+          {this.state.bugSignUp && (
+            <p id="bugSignUp">
+              Un problème est apparu dans l'enregistrement, veuillez
+              recommencer!
+            </p>
+          )}
 
-        {this.state.bugSignUp && (
-          <p id="bugSignUp">
-            Un problème est apparu dans l'enregistrement, veuillez recommencer!
-          </p>
-        )}
-
-        <button onClick={this.afficherSignInForm}>Se connecter</button>
-        <button onClick={this.afficherSignUpForm}>S'inscrire</button>
-        <span
-          onClick={() => {
-            this.setState({
-              showSignInForm: false,
-              showSignUpForm: false,
-              bugSignUp: false
-            });
-          }}
-        >
-          🙀
-        </span>
-
+          <button onClick={this.afficherSignInForm}>Se connecter</button>
+          <button onClick={this.afficherSignUpForm}>S'inscrire</button>
+          <span
+            onClick={() => {
+              this.setState({
+                showSignInForm: false,
+                showSignUpForm: false,
+                bugSignUp: false
+              });
+            }}
+          >
+            🙀
+          </span>
+        </div>
         {this.state.showSignUpForm && (
           <form id="signUpForm" onSubmit={this.handleSubmitSignUp}>
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <label htmlFor="nom">Nom</label>
-                  </td>
-                  <td>
-                    <input type="text" id="nom" name="nom" required />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label htmlFor="prenom">Prénom</label>
-                  </td>
-                  <td>
-                    <input type="text" id="prenom" name="prenom" required />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label htmlFor="email">Adresse email </label>
-                  </td>
-                  <td>
-                    <input type="text" id="email" name="email" required />
-                  </td>
-                </tr>
+            <label htmlFor="nom">Nom</label>
 
-                <tr>
-                  <td>
-                    <label htmlFor="password">Mot de passe </label>
-                  </td>
-                  <td>
-                    <input type="password" id="password" name="password" />
-                  </td>
-                </tr>
+            <input type="text" id="nom" name="nom" required />
+            <br />
 
-                <tr>
-                  <td>
-                    <label htmlFor="repassword">
-                      Confirmer le mot de passe
-                    </label>
-                  </td>
+            <label htmlFor="prenom">Prénom</label>
 
-                  <td>
-                    <input
-                      type="password"
-                      id="repassword"
-                      name="repassword"
-                      required
-                    />
-                  </td>
-                </tr>
+            <input type="text" id="prenom" name="prenom" required />
+            <br />
 
-                <tr>
-                  <td />
-                  <td>
-                    <button>S'enregistrer</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <label htmlFor="email">Adresse email </label>
+
+            <input type="text" id="email" name="email" required />
+            <br />
+
+            <label htmlFor="password">Mot de passe </label>
+
+            <input type="password" id="password" name="password" />
+            <br />
+
+            <label htmlFor="repassword">Confirmer le mot de passe</label>
+
+            <input type="password" id="repassword" name="repassword" required />
+            <br />
+
+            <button>S'enregistrer</button>
           </form>
         )}
 

@@ -87,11 +87,12 @@ getInfosUser = async () =>{
     return (
       <div className="App">
         <header className="App-header">
-          <div><button style={{ color: "red" }} onClick={this.handleLogout}>
-            Se déconnecter
-          </button>
+          <div>
           <button onClick={this.afficherFiltre}>Rechercher un ouvrage</button>
-          <button onClick={this.afficherEmprunts}>Mes emprunts</button></div>
+          <button onClick={this.afficherEmprunts}>Mes emprunts</button>
+          <button style={{ color: "red" }} onClick={this.handleLogout}>
+            Se déconnecter
+          </button></div>
 
           <div>
             <h1>Bienvenu(e) {this.state.dataUser.prenom} {this.state.dataUser.nom} dans votre Bibliothèque !</h1>
@@ -100,6 +101,8 @@ getInfosUser = async () =>{
           {this.state.showEmprunts && <Emprunts />}
 
           {this.state.showRechercheLivre && <RechercheLivre />}
+
+          <br></br>
 
           <div>Ce site web a été construit avec ReactJS <span><img src={logo} className="App-logo" alt="logo" /></span></div>
 

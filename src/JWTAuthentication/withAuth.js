@@ -3,7 +3,7 @@ import AuthService from './AuthService';
 import {urlServiceApi} from '../configJM'
 
 export default function withAuth(AuthComponent) {
-    const Auth = new AuthService({urlServiceApi});
+    const Auth = new AuthService(urlServiceApi);
     return class AuthWrapped extends Component {
         constructor() {
             super();

@@ -66,9 +66,8 @@ class RechercheLivre extends React.Component {
     });
   };
 
-  supprimerListeLivres = () => {
-    console.log("le bouton supprimer liste livre a été clické");
-    this.setState({ afficherLivres: false, afficherFiltrage: false });
+  resetRecherche = () => {
+    this.setState({ afficherLivres: false, afficherFiltrage: false, afficherRandom : false });
   };
 
 
@@ -107,29 +106,36 @@ class RechercheLivre extends React.Component {
         <button onClick={this.randomLivreDisponible}>
           Un Livre disponible au hasard SVP ! 🎲
         </button>
+        <button onClick={this.resetRecherche}>Reset 👻</button>
+
         {this.state.afficherRandom && (
           <RandomLivre livreRandom={this.state.livreRandom} />
         )}
 </div>
         <form name="rechercheLivre" onSubmit={this.filtrerLivres}>
-          <div>
-            <label>
+         
+
+            <table><tbody>
+            
+            <tr><td><label>
               <input type="radio" name="typeRecherche" value="Titre" required />
               Par titre
             </label>
-          </div>
-          <div>
+
+            </td></tr>
+
+            <tr><td>
             <label>
               <input type="radio" name="typeRecherche" value="Auteur" />
-              Par auteur
-            </label>
-          </div>
-          <div>
+              Par nom d'auteur
+            </label></td></tr>
+        
+            <tr><td>
             <label>
               <input type="radio" name="typeRecherche" value="Editeur" />
               Par éditeur
-            </label>
-          </div>
+            </label></td></tr>
+            </tbody></table>
 
           <br />
           <label htmlFor="champRecherche">Saisir un mot clef</label>
@@ -144,14 +150,12 @@ class RechercheLivre extends React.Component {
         </form>
 
  
-        <button onClick={this.supprimerListeLivres}>Purger</button>
 
 
         {this.state.afficherFiltrage && (
           <div>
             <p>
-              Il y a {this.state.livresFiltres.length} livres correspondant à
-              votre recherche
+              Il y a {this.state.livresFiltres.length} livres correspondant à votre recherche
             </p>
             <ol>
               {this.state.livresFiltres.map(livre => (

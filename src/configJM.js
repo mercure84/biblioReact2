@@ -1,3 +1,3 @@
-const urlServiceApi = "http://vps671888.ovh.net:8080/api/"
+const urlServiceApi = "http://localhost:8080/api/"
 
 export {urlServiceApi};
