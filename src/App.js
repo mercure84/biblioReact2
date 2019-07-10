@@ -64,6 +64,7 @@ class App extends React.Component {
   }
 
 
+
 // récupération des infos de l'utilisateur (nom, prébnom, id)
 getInfosUser = async () =>{
   const reponse = await fetch(
@@ -96,6 +97,7 @@ getInfosUser = async () =>{
       <div className="App">
         <header className="App-header">
           <div>
+          <button onClick={this.resetState}>🏠</button>
           <button onClick={this.afficherFiltre}>Rechercher un ouvrage</button>
           <button onClick={this.afficherEmprunts}>Mes emprunts</button>
           <button style={{ color: "red" }} onClick={this.handleLogout}>
