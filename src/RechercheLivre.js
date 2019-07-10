@@ -45,7 +45,7 @@ class RechercheLivre extends React.Component {
     });
 
     const reponse = await fetch(
-      urlServiceApi + "/Livre/filtrerLivres?" + "typeRecherche=" +
+      urlServiceApi + "Livre/filtrerLivres?" + "typeRecherche=" +
         typeRecherche +
         "&champRecherche=" +
         champRecherche,
