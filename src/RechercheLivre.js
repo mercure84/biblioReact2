@@ -45,7 +45,7 @@ class RechercheLivre extends React.Component {
     });
 
     const reponse = await fetch(
-      urlServiceApi + "filtrerLivres?" + "typeRecherche=" +
+      urlServiceApi + "/Livre/filtrerLivres?" + "typeRecherche=" +
         typeRecherche +
         "&champRecherche=" +
         champRecherche,
@@ -77,7 +77,7 @@ class RechercheLivre extends React.Component {
       isLoaded : false,
     });
 
-    const response = await fetch(urlServiceApi + "randomLivre", {
+    const response = await fetch(urlServiceApi + "Livre/randomLivre", {
       method: "GET",
       headers: {
         Accept: "application/json",

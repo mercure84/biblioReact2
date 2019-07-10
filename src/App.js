@@ -5,6 +5,7 @@ import RechercheLivre from "./RechercheLivre.js";
 import withAuth from "./JWTAuthentication/withAuth.js";
 import AuthService from "./JWTAuthentication/AuthService.js";
 import Emprunts from "./Emprunts";
+import Accueil from "./Accueil"
 import {urlServiceApi} from './configJM';
 
 
@@ -22,6 +23,8 @@ class App extends React.Component {
   state = {
     showEmprunts: false,
     showRechercheLivre: false,
+    showAccueil: true,
+
     dataUser : []
   
   };
@@ -29,7 +32,9 @@ class App extends React.Component {
   resetState = () => {
     this.setState({
       showEmprunts: false,
-      showRechercheLivre: false
+      showRechercheLivre: false,
+      showAccueil: true,
+
     });
   };
 
@@ -44,13 +49,16 @@ class App extends React.Component {
   afficherEmprunts = () => {
     this.resetState();
     this.setState({
+      showAccueil: false,
       showEmprunts : true
+      
     })
   }
 
   afficherFiltre =() => {
     this.resetState();
     this.setState({
+      showAccueil: false,
       showRechercheLivre : true
     })
   }
@@ -95,8 +103,10 @@ getInfosUser = async () =>{
           </button></div>
 
           <div>
-            <h1>Bienvenu(e) {this.state.dataUser.prenom} {this.state.dataUser.nom} dans votre Bibliothèque !</h1>
+            <h1>Bienvenu(e) {this.state.dataUser.prenom} {this.state.dataUser.nom} à la Bibliothèque des Chartreux !</h1>
           </div>
+
+          {this.state.showAccueil && <Accueil />}
 
           {this.state.showEmprunts && <Emprunts />}
 
