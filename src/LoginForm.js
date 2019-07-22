@@ -1,5 +1,5 @@
 import React from "react";
-import "./LoginForm.css";
+import "./loginForm.css";
 import AuthService from "./JWTAuthentication/AuthService.js";
 import { urlServiceApi } from "./configJM";
 import searchingLogo from "./searching.svg";
